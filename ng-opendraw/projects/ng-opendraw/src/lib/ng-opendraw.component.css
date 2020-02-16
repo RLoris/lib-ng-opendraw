@@ -1,0 +1,12 @@
+.opencanvas {
+    position: absolute;
+}
+
+.layers {
+    position: relative;
+    border-width: 3px;
+    border-style: solid;
+}
+  
+.foreground-layer { z-index: 2; }
+.background-layer { z-index: 1; }

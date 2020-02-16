@@ -1,0 +1,66 @@
+<div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+    <p>This project was made with &hearts; by RLoris</p>
+    <p>Use it, Share it, Improve it</p>
+</div>
+<ng-opendraw 
+    [canHeight]='this.height'
+    [canWidth]='this.width'
+    [lineWidth]='this.lineWidth'
+    [lineColor]='this.getColor()'
+    [commandObs]='this.commandObs$'
+    [drawStyle]='this.drawStyle'
+    [fillShape]='this.fillShape'
+    [eraser]='this.eraser'
+    [allowedDeviceType]='this.allowedDeviceType'
+    [backgroundImage]='this.bgImg'
+    [backgroundColor]='this.bgColor'
+    (outputEvent)='this.processResult($event)'
+    (errorEvent)='this.processError($event)'
+></ng-opendraw>
+<br>
+<button (click)='clearAll()'>CLEAR All</button>
+
+<button (click)='clearBg()'>CLEAR Background</button>
+
+<button (click)='clearFg()'>CLEAR Foreground</button>
+
+<button (click)='exportNow()'>EXPORT Drawing</button>
+<br>
+<label>Allow Device Type:</label>
+<select style="width: 100%;" [(ngModel)]='this.allowedDeviceType'>
+    <option *ngFor='let dt of this.getDeviceTypeList()' [value]='getDeviceType(dt)' >{{dt}}</option>
+</select>
+<br>
+<label>Canvas width: </label>
+<input type="number" [(ngModel)]='this.width'>
+<br>
+<label>Canvas height: </label>
+<input type="number" [(ngModel)]='this.height'>
+<br>
+<label>Line width:</label>
+<input type="number" [(ngModel)]='this.lineWidth' >
+<br>
+<label>Line color:</label>
+<input type="color" [(ngModel)]='this.lineColor' >
+<br>
+<label>Enable random color:</label>
+<input type="checkbox" [checked]='this.randomColor' (change)='changeRandom($event.target.checked)'>
+<br>
+<label>Draw Style:</label>
+<select style="width: 100%;" [(ngModel)]='this.drawStyle'>
+    <option *ngFor='let ds of this.getDrawStyleList()' [value]='getDrawStyle(ds)' >{{ds}}</option>
+</select>
+<br>
+<label>Eraser:</label>
+<input type="checkbox" [checked]="this.eraser" (change)="changeEraser($event.target.checked)">
+<br>
+<label>Fill shapes:</label>
+<input type="checkbox" [checked]="this.fillShape" (change)="changeFill($event.target.checked)">
+<br>
+<label>Background:</label>
+<input type="file" (change)='this.setBgImage($event.target.files)'>
+or
+<input type="color" [(ngModel)]="this.bgColor" >

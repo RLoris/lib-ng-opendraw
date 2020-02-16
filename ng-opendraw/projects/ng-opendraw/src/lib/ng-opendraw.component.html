@@ -1,0 +1,28 @@
+<div class="layers" 
+    [style.height.px]='this.canHeight'
+    [style.width.px]='this.canWidth'
+    [style.borderColor]='this.lineColor'>
+    <canvas 
+        #background
+        class="background-layer opencanvas"
+        [width]="this.canWidth" 
+        [height]="this.canHeight" 
+    >
+    </canvas>
+    <canvas 
+        #foreground
+        class='foreground-layer opencanvas' 
+        (mouseup)='handleDrawing($event)' 
+        (mousemove)='handleDrawing($event)' 
+        (mousedown)='handleDrawing($event)' 
+        (mouseleave)='handleDrawing($event)' 
+        (panstart)='handleDrawing($event)'
+        (panmove)='handleDrawing($event)'
+        (panend)='handleDrawing($event)'
+        (pandown)='handleDrawing($event)'
+        (tap)='handleDrawing($event)'
+        [width]="this.canWidth" 
+        [height]="this.canHeight"
+    >
+    </canvas>
+</div>
