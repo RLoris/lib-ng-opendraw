@@ -1,7 +1,7 @@
 
 # Opendraw
 
-Opendraw is an angular component that manipulates the canvas for drawing content across all devices. It supports touch/pen/mouse devices.
+Opendraw is an angular component that manipulates the canvas for drawing content across all devices. It supports touch/pen/mouse devices. It uses pointerEvent to detect the device.
 
 # Demo
 
@@ -41,7 +41,7 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opendraw/) or clone this
 | [canWidth] | number | Width of the canvas area in px |
 | [lineWidth] | number | Line width in px, default: 3 |
 | [lineColor] | string | Line color, default: black |
-| [commandObs] | Observable<DrawCommand> | Triggers a drawcommand like export, clear, ... | 
+| [commandObs] | Observable(DrawCommand) | Triggers a drawcommand like export, clear, ... | 
 | [drawStyle] | DrawStyle | Specify the drawing style like normal, circle, rectangle, line... default: normal |
 | [fillShape] | boolean | Enable/disable shape filling |
 | [eraser] | boolean | Enable/disable eraser |

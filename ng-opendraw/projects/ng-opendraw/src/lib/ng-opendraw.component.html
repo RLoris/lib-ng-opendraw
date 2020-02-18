@@ -11,16 +11,12 @@
     </canvas>
     <canvas 
         #foreground
-        class='foreground-layer opencanvas' 
-        (mouseup)='handleDrawing($event)' 
-        (mousemove)='handleDrawing($event)' 
-        (mousedown)='handleDrawing($event)' 
-        (mouseleave)='handleDrawing($event)' 
-        (panstart)='handleDrawing($event)'
-        (panmove)='handleDrawing($event)'
-        (panend)='handleDrawing($event)'
-        (pandown)='handleDrawing($event)'
-        (tap)='handleDrawing($event)'
+        class='foreground-layer opencanvas'
+        (pointermove)='handleDeviceDrawing($event)'
+        (pointerdown)='handleDeviceDrawing($event)'
+        (pointerout)='handleDeviceDrawing($event)'
+        (pointerup)='handleDeviceDrawing($event)'
+        (panend)='handleDeviceDrawing($event)'
         [width]="this.canWidth" 
         [height]="this.canHeight"
     >

@@ -6,7 +6,7 @@
   "keywords": ["canvas", "draw", "touch", "pen", "mouse", "color", "image", "shapes", "circle", "rectangle", "line"],
   "displayName": "Angular OpenDraw Library",
   "repository": {"type": "github", "url": "https://github.com/RLoris/lib-ng-opendraw"},
-  "version": "0.0.1",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"

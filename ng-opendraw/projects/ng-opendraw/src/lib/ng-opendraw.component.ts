@@ -206,7 +206,8 @@ export class NgOpendrawComponent implements OnInit {
     }
   }
 
-  handleDrawing(event) {
+  handleDeviceDrawing(event) {
+    event.preventDefault();
     let deviceType = "mouse";
     if(event.pointerType) {
       deviceType = event.pointerType;
@@ -214,65 +215,79 @@ export class NgOpendrawComponent implements OnInit {
     if(!deviceType.match(this._allowedDeviceType)) {
       return;
     }
-    switch (event.type) {
-        case 'mousemove':
-          if(this.drawStyle === DrawStyle.NORMAL) {
-            if(this.drawingActive) {
+    switch(event.pointerType) {
+      case 'mouse':
+      case 'touch':
+        switch (event.type) {
+          case 'pointermove':
+            if(this.drawStyle === DrawStyle.NORMAL) {
+              if(this.drawingActive) {
+                this.draw(event.offsetX, event.offsetY);
+              }
+            }
+          break;
+          case 'pointerup':
+            if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
               this.draw(event.offsetX, event.offsetY);
             }
-          }
-        break;
-        case 'mouseup':
-          if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
-            this.draw(event.offsetX, event.offsetY);
-          }
-          this.drawingActive = false;
-          this.lastPointerX = null;
-          this.lastPointerY = null;
-        break;
-        case 'mousedown':
-          this.drawingActive = true;
-          this.lastPointerX = event.offsetX; 
-          this.lastPointerY = event.offsetY;
-          if(this.drawStyle === DrawStyle.NORMAL) {
-            this.draw(event.offsetX, event.offsetY);
-          }
-        break;
-        case 'mouseleave':
-          if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
-            this.draw(event.offsetX, event.offsetY);
-          }
-          this.drawingActive = false;
-          this.lastPointerX = null;
-          this.lastPointerY = null;
-        break;
-        case 'panmove':
-          if(this.drawStyle === DrawStyle.NORMAL) {
-            if(this.drawingActive) {
+            this.drawingActive = false;
+            this.lastPointerX = null;
+            this.lastPointerY = null;
+          break;
+          case 'pointerdown':
+            this.drawingActive = true;
+            this.lastPointerX = event.offsetX; 
+            this.lastPointerY = event.offsetY;
+            if(this.drawStyle === DrawStyle.NORMAL) {
+              this.draw(event.offsetX, event.offsetY);
+            }
+          break;
+          case 'pointerleave':
+            if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
+              this.draw(event.offsetX, event.offsetY);
+            }
+            this.drawingActive = false;
+            this.lastPointerX = null;
+            this.lastPointerY = null;
+          break;
+          case 'pointerout':
+            if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
+              this.draw(event.offsetX, event.offsetY);
+            }
+            this.drawingActive = false;
+            this.lastPointerX = null;
+            this.lastPointerY = null;
+          break;
+        }  
+      break;
+      case 'pen':
+        switch (event.type) {
+          case 'pointermove':
+            if(this.drawStyle === DrawStyle.NORMAL) {
+              if(this.drawingActive) {
+                this.draw(event.offsetX, event.offsetY);
+              }
+            }
+          break;
+          case 'pointerdown':
+            this.drawingActive = true;
+            this.lastPointerX = event.offsetX; 
+            this.lastPointerY = event.offsetY;
+            if(this.drawStyle === DrawStyle.NORMAL) {
+              this.draw(event.offsetX, event.offsetY);
+            }
+          break;
+          case 'pointerup':
+          case 'panend':
+            if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
               this.draw(event.srcEvent.offsetX, event.srcEvent.offsetY);
             }
-          }
-        break;
-        case 'panstart':
-          this.lastPointerX = event.srcEvent.offsetX; 
-          this.lastPointerY = event.srcEvent.offsetY;
-        case 'pandown':
-        case 'tap':
-          this.drawingActive = true;
-          if(this.drawStyle === DrawStyle.NORMAL) {
-            this.lastPointerX = event.srcEvent.offsetX; 
-            this.lastPointerY = event.srcEvent.offsetY;
-            this.draw(event.srcEvent.offsetX, event.srcEvent.offsetY);
-          }
-        break;
-        case 'panend':
-          if(this.drawStyle === DrawStyle.ELLIPSE || this.drawStyle === DrawStyle.CIRCLE || this.drawStyle === DrawStyle.LINE || this.drawStyle === DrawStyle.RECTANGLE) {
-            this.draw(event.srcEvent.offsetX, event.srcEvent.offsetY);
-          }
-          this.drawingActive = false;
-          this.lastPointerX = null;
-          this.lastPointerY = null;
-        break;
+            this.drawingActive = false;
+            this.lastPointerX = null;
+            this.lastPointerY = null;
+          break;
+        }
+      break;
     }
   }
 
