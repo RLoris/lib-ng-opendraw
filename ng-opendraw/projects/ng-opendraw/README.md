@@ -17,6 +17,17 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opendraw/) or clone this
 
 # How to use
 
+  First install the package with the command `npm i ng-opendraw`
+
+  Then, in your module.ts, import the library module
+
+```
+import { NgOpendrawModule } from 'ng-opendraw';
+```
+
+  And add it to your imports modules.
+  You can now use `<ng-opendraw></ng-opendraw>` it in any component.html
+
 ```
 <ng-opendraw 
     [canHeight]='this.height'
@@ -34,6 +45,9 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opendraw/) or clone this
     (errorEvent)='this.processError($event)'
 ></ng-opendraw>
 ```
+
+Check out the repo for a full demo code [here](https://github.com/RLoris/lib-ng-opendraw)
+
 ## Inputs
 | Property | Type | Note |
 | -------- | ---- | ---- |
